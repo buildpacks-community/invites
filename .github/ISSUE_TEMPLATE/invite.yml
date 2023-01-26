@@ -1,6 +1,6 @@
 name: Invite Member
 description: Invite a new member to the organization
-title: "Invite Member"
+title: "Invite Member: <replace-with-username>"
 body:
   - type: input
     id: username
