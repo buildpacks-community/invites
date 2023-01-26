@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check is issue actor is a maintainer
-        run: gh api /orgs/buildpacks-community/teams/maintainers/memberships/'${{ github.event.issue.user.login }}' --silent
+        run: gh api /orgs/${{ github.repository_owner }}/teams/maintainers/memberships/${{ github.event.issue.user.login }} --silent
         env:
           GITHUB_TOKEN: ${{ secrets.INVITE_TOKEN }}
       - name: Parse issue metadata
         uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
       - name: Invite user
-        run: gh api /orgs/buildpacks-community/memberships/"${USER}" --silent || gh api --method PUT /orgs/buildpacks-community/memberships/"${USER}" -f role='member'
+        run: gh api /orgs/${{ github.repository_owner }}/memberships/${USER} --silent || gh api --method PUT /orgs/${{ github.repository_owner }}/memberships/${USER} -f role='member'
         env:
           GITHUB_TOKEN: ${{ secrets.INVITE_TOKEN }}
           USER: ${{ steps.issue-parser.outputs.issueparser_github_username }}
@@ -24,4 +24,4 @@ jobs:
         uses: peter-evans/close-issue@v2
         with:
           comment: |
-            User invited to the organization.
+            User @${{ steps.issue-parser.outputs.issueparser_github_username }} invited to the organization.
