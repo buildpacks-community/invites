@@ -1,0 +1,23 @@
+name: Issues Generation
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  invite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: stefanbuck/github-issue-praser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/invite.yml
+      - run: gh api /orgs/buildpacks-community/memberships/"${USER}" --silent || gh api --method PUT /orgs/buildpacks-community/memberships/"${USER}" -f role='member'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_INVITE_TOKEN }}
+          USER: ${{ steps.issue-parser.outputs.issueparser_username }}
+      - name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          comment: |
+            User invited to the organization.
