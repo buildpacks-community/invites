@@ -8,4 +8,4 @@ This repository allows existing component maintainers and buildpack team maintai
 2. Provide the username of the user you wish to invite. Eg. - samj1912
 3. A [github action on this repository](https://github.com/buildpacks-community/invites/actions) should kick off with corresponding to the issue you just created.
 4. If the invite is successful the original issue will be closed.
-5. If the invite was unsuccessful or the action failed, simply re-open the issue. If the failure persists, please reach out to @samj1912.
+5. If the invite was unsuccessful or the action failed, simply re-open the issue. If the failure persists, please reach out to the Buildpacks TOC.
