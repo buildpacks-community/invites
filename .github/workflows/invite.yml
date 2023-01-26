@@ -2,7 +2,7 @@ name: Issues Generation
 
 on:
   issues:
-    types: [opened]
+    types: [opened, reopened]
 
 jobs:
   invite:
