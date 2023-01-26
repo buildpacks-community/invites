@@ -10,8 +10,6 @@ jobs:
     steps:
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
-        with:
-          template-path: .github/ISSUE_TEMPLATE/invite.yml
       - run: gh api /orgs/buildpacks-community/memberships/"${USER}" --silent || gh api --method PUT /orgs/buildpacks-community/memberships/"${USER}" -f role='member'
         env:
           GITHUB_TOKEN: ${{ secrets.INVITE_TOKEN }}
